@@ -1,34 +1,53 @@
-import {LLMGraphTransformer} from "@langchain/community/experimental/graph_transformers/llm";
-import {Document} from "@langchain/core/documents";
-import {ChatOpenAI} from "@langchain/openai";
+import { generateObject } from "ai";
 
-export const generateKnowledgeGraphFromHistory = async (historyItems: chrome.history.HistoryItem[]): Promise<string> => {
+import { geminiFlash } from "@/lib/agents/index";
+import { createGraphSchema, GraphType } from "@/lib/schema/graph";
 
-    // const model = new ChatGoogleGenerativeAI({
-    //     model: "gemini-pro",
-    //     apiKey: import.meta.env.VITE_GOOGLE_GENERATIVE_AI_API_KEY,
-    // });
+export const systemMessage = `
+# Knowledge Graph Instructions for GPT-4\n
+## 1. Overview\n
+You are a top-tier algorithm designed for extracting information in structured formats to build a knowledge graph.\n
+Try to capture as much information from the text as possible without sacrifing accuracy. Do not add any information that is not explicitly mentioned in the text\n"
+- **Nodes** represent entities and concepts.\n"
+- The aim is to achieve simplicity and clarity in the knowledge graph, making it\n
+accessible for a vast audience.\n
+## 2. Labeling Nodes\n
+- **Consistency**: Ensure you use available types for node labels.\n
+Ensure you use basic or elementary types for node labels.\n
+- For example, when you identify an entity representing a person, always label it as **'person'**. Avoid using more specific terms like 'mathematician' or 'scientist'
+- **Node IDs**: Never utilize integers as node IDs. Node IDs should be names or human-readable identifiers found in the text.\n
+- **Relationships** represent connections between entities or concepts.\n
+Ensure consistency and generality in relationship types when constructing knowledge graphs. Instead of using specific and momentary types such as 'BECAME_PROFESSOR', use more general and timeless relationship types like 'PROFESSOR'. Make sure to use general and timeless relationship types!\n
+## 3. Coreference Resolution\n
+- **Maintain Entity Consistency**: When extracting entities, it's vital to ensure consistency.\n
+If an entity, such as "John Doe", is mentioned multiple times in the text but is referred to by different names or pronouns (e.g., "Joe", "he"), always use the most complete identifier for that entity throughout the knowledge graph. In this example, use "John Doe" as the entity ID.\n
+Remember, the knowledge graph should be coherent and easily understandable, so maintaining consistency in entity references is crucial.\n
+## 4. Strict Compliance\n
+Adhere to the rules strictly. Non-compliance will result in termination.
+`;
 
-    const model2 = new ChatOpenAI({
-        temperature: 0,
-        model: "gpt-4o",
-        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-    });
+const generateUserPrompt = (
+  historyItems: chrome.history.HistoryItem[],
+): string => {
+  const history = JSON.stringify(
+    historyItems.map((item) => item.title + " " + item.url),
+  );
 
-    const llmGraphTransformer = new LLMGraphTransformer({
-        llm: model2,
-    });
-    const result = await llmGraphTransformer.convertToGraphDocuments(historyItems.map((item) => new Document({pageContent: JSON.stringify(item)})));
-    console.log(`Nodes: ${result[0].nodes.length}`);
-    console.log(`Relationships:${result[0].relationships.length}`);
-    console.log(`graph docs: ${result.map((doc) => JSON.stringify(doc.nodes) + JSON.stringify(doc.relationships))}`);
-    return 'done';
+  return `Here's my history from past 30d:\n${history}`;
+};
 
+export const generateHistoryKnowledgeGraph = async (
+  historyItems: chrome.history.HistoryItem[],
+): Promise<GraphType> => {
+  const { object } = await generateObject({
+    // @ts-ignore
+    model: geminiFlash,
+    maxRetries: 3,
+    system: systemMessage,
+    prompt: generateUserPrompt(historyItems),
+    schema: createGraphSchema([], []),
+    temperature: 0.1,
+  });
 
-    // const session = await ai.languageModel.create();
-
-    // Prompt the model and wait for the whole result to come back.
-    // const result = await session.prompt(systemMessage + "\n\n" + generateUserPrompt(historyItems));  // <- this works
-    // console.log(result);
-    // return result;
-}
+  return object as GraphType;
+};

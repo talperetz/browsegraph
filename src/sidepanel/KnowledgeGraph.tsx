@@ -13,7 +13,7 @@ const KnowledgeGraph: React.FC = () => {
 
   // Trigger fitView when nodes, edges, or dimensions change
   useEffect(() => {
-    fitView({ duration: 500, padding: 0.1 });
+    fitView();
   }, [fitView, nodes, edges, dimensions]);
 
   return (
@@ -28,6 +28,7 @@ const KnowledgeGraph: React.FC = () => {
         fitView
         colorMode="dark"
         edges={edges}
+        fitViewOptions={{ padding: 0.1, duration: 1000 }}
         nodes={nodes}
         proOptions={{ hideAttribution: true }}
       >

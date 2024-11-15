@@ -1,8 +1,8 @@
 import { generateObject } from "ai";
-import { z, ZodEnum, ZodObject, ZodString } from "zod";
 
 import { geminiFlash } from "@/lib/agents/index";
 import { PageItem } from "@/lib/storage/page-vectors";
+import { createGraphSchema, GraphType } from "@/lib/schema/graph";
 
 export const systemMessage = `
 # Knowledge Graph Instructions for GPT-4\n
@@ -27,106 +27,22 @@ Remember, the knowledge graph should be coherent and easily understandable, so m
 Adhere to the rules strictly. Non-compliance will result in termination.
 `;
 
-interface CreateOptionalEnumTypeParams {
-  enumValues?: string[];
-  description?: string;
-  isRel?: boolean;
-}
-
-function createOptionalEnumType({
-  enumValues = undefined,
-  description = "",
-  isRel = false,
-}: CreateOptionalEnumTypeParams): ZodString | ZodEnum<[string, ...string[]]> {
-  let schema;
-
-  if (enumValues && enumValues.length) {
-    schema = z
-      .enum(enumValues as [string, ...string[]])
-      .describe(
-        `${description} Available options are: ${enumValues.join(", ")}.`,
-      );
-  } else {
-    const nodeInfo =
-      "Ensure you use basic or elementary types for node labels.\n" +
-      "For example, when you identify an entity representing a person, " +
-      "always label it as **'Person'**. Avoid using more specific terms " +
-      "like 'Mathematician' or 'Scientist'";
-    const relInfo =
-      "Instead of using specific and momentary types such as " +
-      "'BECAME_PROFESSOR', use more general and timeless relationship types like " +
-      "'PROFESSOR'. However, do not sacrifice any accuracy for generality";
-    const additionalInfo = isRel ? relInfo : nodeInfo;
-
-    schema = z.string().describe(description + additionalInfo);
-  }
-
-  return schema;
-}
-
-interface CreateSchemaParams {
-  allowedNodes: string[];
-  allowedRelationships: string[];
-}
-
-function createSchema(
-  allowedNodes: CreateSchemaParams["allowedNodes"],
-  allowedRelationships: CreateSchemaParams["allowedRelationships"],
-): ZodObject<any> {
-  return z.object({
-    nodes: z
-      .array(
-        z.object({
-          id: z.string(),
-          type: createOptionalEnumType({
-            enumValues: allowedNodes,
-            description: "The type or label of the node.",
-          }),
-        }),
-      )
-      .describe("List of nodes"),
-    relationships: z
-      .array(
-        z.object({
-          sourceNodeId: z.string(),
-          sourceNodeType: createOptionalEnumType({
-            enumValues: allowedNodes,
-            description: "The source node of the relationship.",
-          }),
-          relationshipType: createOptionalEnumType({
-            enumValues: allowedRelationships,
-            description: "The type of the relationship.",
-            isRel: true,
-          }),
-          targetNodeId: z.string(),
-          targetNodeType: createOptionalEnumType({
-            enumValues: allowedNodes,
-            description: "The target node of the relationship.",
-          }),
-        }),
-      )
-      .describe("List of relationships."),
-  });
-}
-
 const generateUserPrompt = (title: string, content: string): string => {
   return `Here's the web page info:\n###Title:\n${title}\n###Content:\n${content}`;
 };
 
-export type PageKnowledgeGraph = z.infer<ReturnType<typeof createSchema>>;
-
 export const generatePageKnowledgeGraph = async (
   page: PageItem,
-): Promise<PageKnowledgeGraph> => {
+): Promise<GraphType> => {
   const { object } = await generateObject({
     // @ts-ignore
     model: geminiFlash,
     maxRetries: 3,
     system: systemMessage,
     prompt: generateUserPrompt(page.title, JSON.stringify(page.content)),
-    schema: createSchema([], []),
+    schema: createGraphSchema([], []),
     temperature: 0.1,
   });
 
-  return object as PageKnowledgeGraph;
+  return object as GraphType;
 };

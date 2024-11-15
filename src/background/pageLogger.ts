@@ -18,23 +18,13 @@ const tabChangedListener = (
 
   if (changeInfo.status === "complete") {
     console.log("Tab changed:", tab.url);
-    if (tabChangeTimeout && currentUrl !== tab.url) {
-      clearTimeout(tabChangeTimeout);
-
-      return;
-    }
 
     currentTabId = tabId;
     currentUrl = tab.url;
 
-    tabChangeTimeout = setTimeout(() => {
-      if (currentTabId !== null) {
-        console.log("Requesting content for tab:", currentTabId);
-        chrome.tabs
-          .sendMessage(currentTabId, { type: "TAB_CHANGE" })
-          .catch(console.error);
-      }
-    }, 10); // 10 miliseconds
+    chrome.tabs
+      .sendMessage(currentTabId, { type: "TAB_CHANGE" })
+      .catch(console.error);
   }
 };
 
