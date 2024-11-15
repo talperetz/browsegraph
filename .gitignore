@@ -1,24 +1,55 @@
-# Logs
-logs
-*.log
+# Node.js
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Logs
+logs
+*.log
+*.log.*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Vite build output
+dist/
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Chrome Extension build output
+build/
+out/
+coverage/
+package/
+
+# MacOS
 .DS_Store
+
+# Vite & Editor Configurations
+.vscode/
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Local environment files
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# JetBrains IDEs
+.idea/
+*.iml
+out/
+
+# macOS
+.DS_Store
+
+# Other
+Thumbs.db
+Desktop.ini
