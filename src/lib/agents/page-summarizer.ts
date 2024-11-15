@@ -2,7 +2,7 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { Document } from "langchain/document";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { loadSummarizationChain } from "langchain/chains";
-import { chromeai } from "chrome-ai";
+import { ChromeAI } from "@langchain/community/experimental/llms/chrome_ai";
 
 import { TabContentMessage } from "@/types";
 
@@ -85,10 +85,8 @@ const pageToDocs = async (page: TabContentMessage): Promise<Document[]> => {
 //     return reply.text;
 // }
 
-const model = chromeai("text", {
-  // additional settings
+const summaryLlm = new ChromeAI({
   temperature: 0.5,
-  topK: 5,
 });
 
 export const summarizePage = async (

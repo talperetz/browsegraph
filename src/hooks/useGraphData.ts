@@ -3,7 +3,7 @@ import { Edge, MarkerType, Node } from "@xyflow/react";
 import * as d3 from "d3";
 
 import { getKnowledgeGraphFromDB } from "@/lib/storage";
-import useCurrentUrl from "@/lib/hooks/useCurrentUrlHook";
+import useCurrentUrl from "@/hooks/useCurrentUrlHook";
 import {
   generateDeterministicPosition,
   getColorForRelationshipType,
@@ -70,6 +70,7 @@ const useGraphData = (dimensions: { width: number; height: number }) => {
 
       if (!hasLayoutRun.current) {
         const simulation = d3
+          // @ts-ignore
           .forceSimulation(flowNodes)
           .force("charge", d3.forceManyBody().strength(-300))
           .force(
@@ -99,7 +100,9 @@ const useGraphData = (dimensions: { width: number; height: number }) => {
 
         const updatedEdges = flowEdges.map((edge) => ({
           ...edge,
+          // @ts-ignore
           source: edge.source.id || edge.source,
+          // @ts-ignore
           target: edge.target.id || edge.target,
         }));
 

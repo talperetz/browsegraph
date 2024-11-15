@@ -2,7 +2,7 @@ import { Command } from "cmdk";
 import "@/styles/linear.scss";
 import React from "react";
 
-import { useSearchPages } from "@/lib/hooks/use-search-pages";
+import { useSearchPages } from "@/hooks/useSearchPages";
 
 export function CommandMenu() {
   const [search, setSearch] = React.useState("");
