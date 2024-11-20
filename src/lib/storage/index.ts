@@ -33,8 +33,12 @@ export async function getTodayKnowledgeGraphsFromDB(): Promise<GraphType[]> {
 
   const todayGraphs: GraphType[] = [];
   const today = new Date();
+  const yesterday = new Date();
+
+  yesterday.setDate(today.getDate() - 10);
 
   today.setHours(0, 0, 0, 0); // Set to the beginning of today
+  yesterday.setHours(0, 0, 0, 0); // Set to the beginning of today
 
   // Use a cursor to iterate and filter by today's date
   await store.openCursor().then(function cursorIterate(cursor) {
@@ -43,7 +47,7 @@ export async function getTodayKnowledgeGraphsFromDB(): Promise<GraphType[]> {
     const graph = cursor.value;
     const graphDate = new Date(graph.createdAt);
 
-    if (graphDate >= today) {
+    if (graphDate >= yesterday) {
       todayGraphs.push(graph);
     }
 

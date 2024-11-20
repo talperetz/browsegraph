@@ -50,3 +50,27 @@ export interface SummaryMessage {
     content: string;
   };
 }
+
+export type AILanguageModelPromptInput =
+  | string
+  | AILanguageModelPrompt
+  | AILanguageModelPrompt[];
+
+export interface AILanguageModelPrompt {
+  role: AILanguageModelPromptRole;
+  content: string;
+}
+
+export type AILanguageModelPromptRole = "system" | "user" | "assistant";
+
+export enum PreferredDesign {
+  Light = "light",
+  Dark = "dark",
+}
+
+export interface UserPreferences {
+  id: string;
+  preferredContent: string;
+  preferredDesign: PreferredDesign;
+  updatedAt: number;
+}

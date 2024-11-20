@@ -109,6 +109,7 @@ const useTodayGraphsData = (dimensions: { width: number; height: number }) => {
       // Layout only once for all nodes and edges
       if (!hasLayoutRun.current) {
         const simulation = d3
+          // @ts-ignore
           .forceSimulation(allNodes)
           .force("charge", d3.forceManyBody().strength(-300))
           .force(

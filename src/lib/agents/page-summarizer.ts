@@ -4,7 +4,8 @@ import { PromptTemplate } from "@langchain/core/prompts";
 import { loadSummarizationChain } from "langchain/chains";
 import { ChromeAI } from "@langchain/community/experimental/llms/chrome_ai";
 
-import { TabContentMessage } from "@/types";
+import { PageItem } from "@/lib/storage/page-vectors";
+import { GraphType } from "@/lib/schema/graph";
 
 const summaryTemplate = `
 You are an expert in summarizing web pages for later retrieval.
@@ -53,7 +54,7 @@ const SUMMARY_REFINE_PROMPT = PromptTemplate.fromTemplate(
 // 3. Keep the summary concise and informative.
 // 4. Use your expertise to provide a high-quality questions that can be answered by the page.
 // `
-const pageToDocs = async (page: TabContentMessage): Promise<Document[]> => {
+const pageToDocs = async (page: PageItem): Promise<Document[]> => {
   // const docs = [
   //     new Document({
   //         pageContent: page.details.content,
@@ -61,8 +62,8 @@ const pageToDocs = async (page: TabContentMessage): Promise<Document[]> => {
   //     }),
   // ];
   const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1200,
-    chunkOverlap: 0,
+    chunkSize: 3000,
+    chunkOverlap: 500,
   });
   // const transformer = new HtmlToTextTransformer();
 
@@ -72,25 +73,13 @@ const pageToDocs = async (page: TabContentMessage): Promise<Document[]> => {
   return await splitter.createDocuments([page.details.content]);
 };
 
-// export const summarizeChunk = async (chunk: Document): Promise<string> => {
-//     console.log("Summarizing chunk:", chunk);
-//     const reply = await generateText({
-//         model: chromeai(),
-//         maxRetries: 3,
-//         system: systemMessage,
-//         prompt: chunk.pageContent,
-//         temperature: 0.5,
-//     });
-//     console.log("Summary:", reply.text);
-//     return reply.text;
-// }
-
 const summaryLlm = new ChromeAI({
   temperature: 0.5,
 });
 
 export const summarizePage = async (
-  page: TabContentMessage,
+  page: PageItem,
+  knowledgeGraph: GraphType,
 ): Promise<string> => {
   const pageChunks = await pageToDocs(page);
 

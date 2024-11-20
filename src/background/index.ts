@@ -2,6 +2,9 @@ import { startAllBackgroundJobs } from "./chromeActivity";
 import { storeUserPreferences } from "./actions";
 import { keepAlive } from "./keep-alive";
 
+import { XMLHttpRequestPolyfill } from "@/lib/pollyfills/xhrPollyfill";
+
+(globalThis as any).XMLHttpRequest = XMLHttpRequestPolyfill;
 const initializeExtension = async () => {
   try {
     keepAlive(true);

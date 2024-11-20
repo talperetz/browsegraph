@@ -18,3 +18,5 @@ build
 !plopfile.js
 !react-shim.js
 !tsup.config.ts
+
+src/lib/chrome-ai/*
