@@ -1,4 +1,3 @@
-// @ts-ignore
 import { PGlite } from "@electric-sql/pglite";
 // @ts-ignore
 import { vector } from "@electric-sql/pglite/vector";
@@ -11,7 +10,9 @@ export async function getDB() {
     return dbInstance;
   }
   const metaDb = new PGlite("idb://browsegraph-db", {
-    extensions: { vector },
+    extensions: {
+      vector,
+    },
   });
 
   await metaDb.waitReady;
@@ -77,14 +78,8 @@ export const search = async (
     `
     select * from embeddings
 
-    -- The inner product is negative, so we negate match_threshold
     where embeddings.embedding <#> $1 < $2
 
-    -- Our embeddings are normalized to length 1, so cosine similarity
-    -- and inner product will produce the same query results.
-    -- Using inner product which can be computed faster.
-    --
-    -- For the different distance functions, see https://github.com/pgvector/pgvector
     order by embeddings.embedding <#> $1
     limit $3;
     `,

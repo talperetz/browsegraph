@@ -6,6 +6,9 @@ import { insertEmbeddings } from "@/lib/vector-storage";
 import { getLatestUserPreferencesFromDB } from "@/lib/storage/user";
 import { geminiEmbeddingModel } from "@/lib/agents";
 import { chunkPage } from "@/lib/agents/page-chunker";
+import { getKnowledgeGraphFromDB, saveKnowledgeGraphToDB } from "@/lib/storage";
+import { classifyShouldReadPage } from "@/lib/agents/page-category-classifier";
+import { generatePageKnowledgeGraph } from "@/lib/agents/page-graph-transformer";
 
 let tabChangeTimeout: ReturnType<typeof setTimeout> | null = null;
 let currentTabId: number | null = null;
@@ -110,41 +113,41 @@ chrome.runtime.onMessage.addListener(async (message: TabContentMessage) => {
     content: message.details.content,
   };
 
-  // const existingPageKnowledgeGraph = await getKnowledgeGraphFromDB(
-  //   page.url,
-  // ).catch();
-  //
-  // if (existingPageKnowledgeGraph) {
-  //   console.log(
-  //     "Page already exists in the database:",
-  //     existingPageKnowledgeGraph,
-  //   );
-  //
-  //   return;
-  // }
-  //
-  // const userPreferences = await loadUserPreferencesIfNeeded();
-  //
-  // const shouldUserReadPage = await classifyShouldReadPage(
-  //   userPreferences,
-  //   page,
-  // );
-  //
-  // console.debug("Should user read page:", shouldUserReadPage);
-  //
-  // if (!shouldUserReadPage) {
-  //   return;
-  // }
-  //
-  // console.debug("Generating knowledge graph...", page);
-  // const graph = await generatePageKnowledgeGraph(page).catch(console.error);
-  //
-  // if (!graph) {
-  //   return;
-  // }
-  //
-  // await saveKnowledgeGraphToDB(page.url, graph).catch(console.error);
-  //
+  const existingPageKnowledgeGraph = await getKnowledgeGraphFromDB(
+    page.url,
+  ).catch();
+
+  if (existingPageKnowledgeGraph) {
+    console.log(
+      "Page already exists in the database:",
+      existingPageKnowledgeGraph,
+    );
+
+    return;
+  }
+
+  const userPreferences = await loadUserPreferencesIfNeeded();
+
+  const shouldUserReadPage = await classifyShouldReadPage(
+    userPreferences,
+    page,
+  );
+
+  console.debug("Should user read page:", shouldUserReadPage);
+
+  if (!shouldUserReadPage) {
+    return;
+  }
+
+  console.debug("Generating knowledge graph...", page);
+  const graph = await generatePageKnowledgeGraph(page).catch(console.error);
+
+  if (!graph) {
+    return;
+  }
+
+  await saveKnowledgeGraphToDB(page.url, graph).catch(console.error);
+
   console.debug("Stored page knowledge graph in db");
 
   const docs = await chunkPage(page);
@@ -162,15 +165,4 @@ chrome.runtime.onMessage.addListener(async (message: TabContentMessage) => {
   await insertEmbeddings(embeddingData).catch(console.error);
 
   console.debug("Inserted embeddings into the database");
-
-  // indexPage(page).then(async () => {
-  //     // const queryEmbedding = await getEmbedding(page.title);
-  //     // const results = await index.search(queryEmbedding, {topK: 5, useStorage: "indexedDB",})
-  //     searchPages(page.title, 5).then(results => {
-  //         if (!results || !results.length) {
-  //             return;
-  //         }
-  //         console.log('Search results:', results);
-  //     }).catch(console.error);
-  // }).catch(console.error);
 });

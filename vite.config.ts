@@ -4,7 +4,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { crx } from "@crxjs/vite-plugin";
 import zipPack from "vite-plugin-zip-pack";
-import { viteStaticCopy } from "vite-plugin-static-copy";
 
 import manifest from "./src/manifest";
 
@@ -46,22 +45,22 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     crx({ manifest }),
     react(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: "node_modules/@electric-sql/pglite/dist/postgres.wasm",
-          dest: "",
-        },
-        {
-          src: "node_modules/@electric-sql/pglite/dist/postgres.data",
-          dest: "",
-        },
-        {
-          src: "node_modules/@electric-sql/pglite/dist/vector.tar.gz",
-          dest: "",
-        },
-      ],
-    }),
+    // viteStaticCopy({
+    //   targets: [
+    //     {
+    //       src: "node_modules/@electric-sql/pglite/dist/postgres.wasm",
+    //       dest: "",
+    //     },
+    //     {
+    //       src: "node_modules/@electric-sql/pglite/dist/postgres.data",
+    //       dest: "",
+    //     },
+    //     {
+    //       src: "node_modules/@electric-sql/pglite/dist/vector.tar.gz",
+    //       dest: "",
+    //     },
+    //   ],
+    // }),
     zipPack({
       outDir: `package`,
       inDir: "build",

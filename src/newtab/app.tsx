@@ -4,12 +4,13 @@ import "@/styles/index.module.scss";
 
 import { Background, Controls, ReactFlow } from "@xyflow/react";
 import React from "react";
-
+import { Spinner } from "@nextui-org/spinner";
 import "@xyflow/react/dist/style.css";
+
 import DefaultLayout from "@/layouts/default";
 import { subtitle, title } from "@/components/primitives";
-import { CommandMenu } from "@/components/command-menu";
 import useTodayGraphsData from "@/hooks/useTodayKnowledgeGrpahs";
+import { CommandMenu } from "@/components/command-menu";
 
 export default function IndexPage() {
   const { nodes, edges, loading } = useTodayGraphsData({
@@ -36,13 +37,7 @@ export default function IndexPage() {
             </h4>
             <CommandMenu />
           </div>
-          <div className="mt-8">
-            {loading ? (
-              <p>Loading today&#39;s graphs...</p>
-            ) : (
-              <p>Today&#39;s graphs loaded successfully.</p>
-            )}
-          </div>
+          <div className="mt-8">{loading && <Spinner />}</div>
         </section>
       </ReactFlow>
     </DefaultLayout>
