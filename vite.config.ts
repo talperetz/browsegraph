@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { crx } from "@crxjs/vite-plugin";
 import zipPack from "vite-plugin-zip-pack";
+import svgr from "vite-plugin-svgr";
 
 import manifest from "./src/manifest";
 
@@ -61,6 +62,7 @@ export default defineConfig(({ mode }) => ({
     //     },
     //   ],
     // }),
+    svgr({ include: "**/*.svg" }),
     zipPack({
       outDir: `package`,
       inDir: "build",

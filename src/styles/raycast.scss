@@ -3,8 +3,8 @@
     max-width: 640px;
     width: 100%;
     background: var(--gray1);
-    border-radius: 12px;
-    padding: 8px 0;
+    border-radius: 8px;
+    padding: 4px 0;
     font-family: var(--font-sans);
     box-shadow: var(--cmdk-shadow);
     border: 1px solid var(--gray6);
@@ -107,15 +107,14 @@
     --loader-color: var(--gray9);
     border: 0;
     width: 100%;
-    width: 100%;
     left: 0;
     height: 1px;
     background: var(--gray6);
     position: relative;
     overflow: visible;
     display: block;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
 
     &:after {
       content: '';
@@ -126,7 +125,7 @@
       top: -1px;
       opacity: 0;
       animation-duration: 1.5s;
-      animation-delay: 1s;
+      animation-delay: 0.5s;
       animation-timing-function: ease;
       animation-name: loading;
     }
@@ -136,7 +135,6 @@
     content-visibility: auto;
 
     cursor: pointer;
-    height: 40px;
     border-radius: 8px;
     font-size: 14px;
     display: flex;
@@ -182,17 +180,22 @@
     margin-left: auto;
     color: var(--gray11);
     font-size: 13px;
+    display: none;
+
   }
+
+  [data-selected="true"] [cmdk-raycast-meta] {
+  display: inline-block;
+}
 
   [cmdk-list] {
     padding: 0 8px;
-    height: 393px;
     overflow: auto;
     overscroll-behavior: contain;
     scroll-padding-block-end: 40px;
     transition: 100ms ease;
     transition-property: height;
-    padding-bottom: 40px;
+    padding-bottom: 12px;
   }
 
   [cmdk-raycast-open-trigger],
@@ -401,10 +404,8 @@
   }
 
   [cmdk-item] {
-    height: 40px;
 
     cursor: pointer;
-    height: 40px;
     border-radius: 8px;
     font-size: 13px;
     display: flex;
