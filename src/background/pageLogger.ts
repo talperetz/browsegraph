@@ -77,23 +77,6 @@ export const stopInteractionLogger = (): void => {
   stopTabChangeListener();
 };
 
-// const getEmbedding = async (text: string): Promise<number[]> => {
-//     const embeddingResult = await embed({
-//         model: chromeai('embedding'),
-//         value: text,
-//     });
-//     return embeddingResult.embedding;
-// }
-//
-// export const indexPage = async (page: PageItem) => {
-//     index.add({...page, embedding: await getEmbedding(page.title)});
-//     page.headers.map(async (header: string) => {
-//         index.add({...page, embedding: await getEmbedding(header)});
-//     });
-//     index.saveIndex('indexedDB').catch((error) => console.error('Error saving index:', error));
-//     console.log('Indexed page:', page);
-// }
-
 chrome.runtime.onMessage.addListener(async (message: TabContentMessage) => {
   console.log("Received tab content:", message);
   if (!message || message.type !== "TAB_CONTENT" || !message.details.content) {
@@ -152,14 +135,17 @@ chrome.runtime.onMessage.addListener(async (message: TabContentMessage) => {
 
   const docs = await chunkPage(page);
   const texts = docs.map((doc) => doc.pageContent);
-  const embeddings = embedMany({ model: geminiEmbeddingModel, values: texts });
+  const embeddings = await embedMany({
+    model: geminiEmbeddingModel,
+    values: texts,
+  });
 
   console.debug("Finished generating embeddings", embeddings);
 
   const embeddingData = docs.map((doc, index) => ({
     url: doc.metadata.url,
     content: doc.pageContent,
-    embedding: embeddings[index],
+    embedding: embeddings.embeddings[index],
   }));
 
   await insertEmbeddings(embeddingData).catch(console.error);

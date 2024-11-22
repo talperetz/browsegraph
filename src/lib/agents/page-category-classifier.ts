@@ -9,7 +9,7 @@ You are an expert content recommender.
 Your task is to classify whether the user would like reading it based on their preferences and the page content preview.
 Classification should be a number between 0.0 and 1.0.
 
-User preferences are ${userPreferences ? JSON.stringify(userPreferences) : "not available"}.
+User preferences are ${userPreferences ? JSON.stringify(userPreferences.preferredContent) + " non-exclusive list" : "not available"}.
 `;
 
 export const classifyShouldReadPage = async (

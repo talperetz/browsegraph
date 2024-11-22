@@ -41,7 +41,7 @@ export async function insertEmbeddings(
   dataArray: Array<{
     url: string;
     content: string;
-    embedding: number[];
+    embedding: Array<number>;
   }>,
 ) {
   const db = await getDB();
@@ -53,6 +53,8 @@ export async function insertEmbeddings(
     for (const data of dataArray) {
       // Serialize the embedding array to JSON
       const embeddingJson = JSON.stringify(data.embedding);
+
+      console.debug(`Inserting embedding for ${embeddingJson}`);
 
       // Insert the embedding
       await tx.query(
@@ -68,12 +70,12 @@ export async function insertEmbeddings(
   console.debug(`Inserted ${dataArray.length} embeddings`);
 }
 
-export const search = async (
-  db,
+export const searchPglite = async (
   embedding,
   match_threshold = 0.8,
   limit = 3,
 ) => {
+  const db = await getDB();
   const res = await db.query(
     `
     select * from embeddings
@@ -86,5 +88,5 @@ export const search = async (
     [JSON.stringify(embedding), -Number(match_threshold), Number(limit)],
   );
 
-  return res.rows;
+  return res;
 };
