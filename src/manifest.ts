@@ -7,11 +7,12 @@ export default defineManifest({
   version: "0.0.1",
   manifest_version: 3,
   icons: {
-    "16": "img/icon16.png",
-    "32": "img/icon32.png",
-    "48": "img/icon48.png",
-    "128": "img/icon128.png",
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
   },
+
   action: {
     default_icon: "img/icon48.png",
   },
