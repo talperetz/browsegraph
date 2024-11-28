@@ -14,7 +14,7 @@ export default defineManifest({
   },
 
   action: {
-    default_icon: "img/icon48.png",
+    default_icon: "icons/icon48.png",
   },
   // options_page: 'options.html',
   background: {
