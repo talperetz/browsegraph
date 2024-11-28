@@ -24,7 +24,7 @@
 ## ⚡ Getting Started
 
 1. **Install BrowseGraph**  
-   Add BrowseGraph to your Chrome browser with a single click. No complicated setups.
+   Add BrowseGraph to your Chrome browser with a single click. Coming soon to Chrome Web Store.
 
 2. **Start Browsing**  
    BrowseGraph works silently in the background, connecting every page you visit into a dynamic visual network.
@@ -34,7 +34,7 @@
 
 
 
-## 🌟 Features
+## 🔥 Key Features
 
 - **Local-First Processing**: All AI computations are performed locally within your browser using in-browser LLMs.
 - **Dynamic Knowledge Graphing**: Automatically capture and organize everything you browse into a visual knowledge network.
