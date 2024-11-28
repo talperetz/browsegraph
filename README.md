@@ -1,7 +1,7 @@
 <div align="center">
 <div>
   <a href="https://browsegraph.com/">
-    <img src="./src/assets/browsegraph-logo.svg" alt="BrowseGraph Logo" />
+    <img width=320 src="./src/assets/browsegraph-logo.svg" alt="BrowseGraph Logo" />
   </a>
 </div>
   
