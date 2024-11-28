@@ -41,8 +41,8 @@
 - **Dynamic Knowledge Graphing**: Automatically capture and organize everything you browse into a visual knowledge network.
 - **Smart Content Filtering**: Filters out irrelevant pages based on your interests.
 - **Efficient Summarization**: Summarizes and indexes page content for quick access.
-- **Graph-Based Insights**: Creates and stores graph data to enhance content recommendations.
 - **Blazingly Fast Retrieval**: Retrieve any piece of your browsed content instantly with powerful search and intuitive navigation.
+- **Side-by-side Knowledge Graph**: Visualize the knowledge in the current page:
 
 </br>
 
