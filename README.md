@@ -1,50 +1,74 @@
-# Vite & NextUI Template
+# BrowseGraph 🚀🔒
+## The 2nd Brain for Visual Thinkers
 
-This is a template for creating applications using Vite and NextUI (v2).
+Everything you browse, fully connected and always accessible.
+BrowseGraph is the first implementation of a local-first GraphRAG.
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/vite-template)
+![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-1.0.0-blue) ![Chrome Version](https://img.shields.io/badge/Chrome-133%2B-orange)
 
-## Technologies Used
+---
 
-- [Vite](https://vitejs.dev/guide/)
-- [NextUI](https://nextui.org)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+## 📌 Getting Started
 
-## How to Use
+1. **Install BrowseGraph**  
+   Add BrowseGraph to your Chrome browser with a single click. No complicated setups.
 
-To clone the project, run the following command:
+2. **Start Browsing**  
+   BrowseGraph works silently in the background, connecting every page you visit into a dynamic visual network.
 
-```bash
-git clone https://github.com/nextui-org/vite-template.git
+3. **Search and Ask**  
+   Access all your knowledge seamlessly. Instantly search, navigate, and discover information whenever you need it.
+
+
+## 🌟 Features
+
+- **Local-First Processing**: All AI computations are performed locally within your browser using in-browser LLMs.
+- **Dynamic Knowledge Graphing**: Automatically capture and organize everything you browse into a visual knowledge network.
+- **Smart Content Filtering**: Filters out irrelevant pages based on your interests.
+- **Efficient Summarization**: Summarizes and indexes page content for quick access.
+- **Graph-Based Insights**: Creates and stores graph data to enhance content recommendations.
+- **Blazingly Fast Retrieval**: Retrieve any piece of your browsed content instantly with powerful search and intuitive navigation.
+
+---
+
+## 🧩 How It Works
+
+```mermaid
+sequenceDiagram
+    %% Participants
+    participant Extension as Chrome Extension
+    participant Personalizer as User Content Personalizer<br/>(Local LLM)
+    participant Classifier as Page Classifier<br/>(Local LLM)
+    participant Summarizer as Page Summarizer<br/>(Local LLM)
+    participant CloudLLM as Page-Graph-Transformer<br/>(Cloud LLM)
+    participant Database as Local Database
+
+    %% User action without a participant node
+    Note over Extension: User browses a web page
+
+    %% Sequence of interactions
+    Extension ->> Personalizer: Generate User Interests
+    Personalizer -->> Extension: User Interests
+    Extension ->> Classifier: Classify Page vs. User Interests
+    Classifier -->> Extension: Relevance Result (Relevant)
+
+    Extension ->> Summarizer: Chunk and Summarize Content
+    Summarizer -->> Extension: Summarized Data
+    Extension ->> Database: Index Summarized Data
+    Extension ->> CloudLLM: Send Minimal Data
+    CloudLLM -->> Extension: Return Graph Data
+    Extension ->> Database: Store Graph Data
 ```
 
-### Install dependencies
+## 🔒 Privacy & Security
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+- **Data Locality:** All raw data processing occurs within your browser using local LLMs and local vector DB.
+- **Minimal Cloud Interaction:** Only non-sensitive, aggregated data is sent to the cloud for graph transformations.
+- **No Data Sharing:** Your browsing data is never shared with third parties.
 
-```bash
-npm install
-```
+## 📈 Roadmap
 
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/vite-template/blob/main/LICENSE).
+- [ ] **Conversational Interface:** Build an interactive conversational layer to simplify user interactions.
+- [ ] **Artifacts UX:** Enable a side-by-side view of chat and graph for seamless exploration.
+- [ ] **Bring Your Own Key (BYOK):** Support user-provided keys for LLM providers to offer flexibility and control.
+- [ ] **Chrome Web Store Launch:** Officially release BrowseGraph on the Chrome Web Store.

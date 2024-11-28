@@ -188,7 +188,18 @@ export function CommandMenu() {
 
     searchPglite(embedding, 0.0, 10).then((res) => {
       console.log("Results: ", res);
-      setResults(res);
+      const uniqueRowsMap = new Map();
+
+      res.rows.forEach((row) => {
+        // @ts-ignore
+        if (!uniqueRowsMap.has(row.url)) {
+          // @ts-ignore
+          uniqueRowsMap.set(row.url, row);
+        }
+      });
+      const uniqueRows = Array.from(uniqueRowsMap.values());
+
+      setResults({ ...res, rows: uniqueRows });
     });
   }, [db, search, embedding]);
 
