@@ -1,7 +1,9 @@
 <div align="center">
-   <h2>
-      BrowseGraph - The 2nd Brain for Visual Thinkers
-   </h2>
+<div>
+  <a href="https://browsegraph.com/">
+    <img src="./src/assets/browsegraph-logo.svg" alt="BrowseGraph Logo" />
+  </a>
+</div>
    Everything you browse, fully connected and always accessible. </br>
    BrowseGraph is the first implementation of a local-first GraphRAG.
 </div>
