@@ -1,5 +1,11 @@
-# BrowseGraph 🚀🔒
-![CleanShot 2024-11-28 at 09 32 07](https://github.com/user-attachments/assets/c465ba81-d57d-47fb-9e4c-83434d04040d)
+# BrowseGraph
+
+<div align="center">
+   <video src="https://github.com/user-attachments/assets/aca8849b-0dce-4ff8-9dc1-9cc46b0055d0" width="400" control autoplay loop/>
+</div>
+
+
+
 
 ## The 2nd Brain for Visual Thinkers
 
