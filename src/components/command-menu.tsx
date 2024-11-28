@@ -104,8 +104,11 @@ function Item({ row, index, search }) {
       value={`${row.url as string}-${index}`}
       onSelect={() => {
         const cleanSnippet = snippet
-          .replace(/^\.{3}/, "")
-          .replace(/\.{3}$/, "");
+          .replace(/^\.{3}/, "") // Remove leading ellipsis
+          .replace(/\.{3}$/, "") // Remove trailing ellipsis
+          .split(/\s+/) // Split snippet into words
+          .slice(0, 3) // Take the first 3 words
+          .join(" "); // Join them back into a string
         const urlWithFragment = `${row.url}#:~:text=${encodeURIComponent(cleanSnippet)}`;
 
         window.open(urlWithFragment, "_blank");
