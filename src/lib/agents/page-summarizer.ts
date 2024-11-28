@@ -4,7 +4,7 @@ import { PromptTemplate } from "@langchain/core/prompts";
 import { loadSummarizationChain } from "langchain/chains";
 import { ChromeAI } from "@langchain/community/experimental/llms/chrome_ai";
 
-import { PageItem } from "@/lib/storage/page-vectors";
+import { PageItem } from "@/types";
 import { GraphType } from "@/lib/schema/graph";
 
 const summaryTemplate = `

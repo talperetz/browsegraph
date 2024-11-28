@@ -1,8 +1,7 @@
 import pRetry from "p-retry";
 
 import { sliceToMaxTokens } from "@/lib/agents/index";
-import { PageItem } from "@/lib/storage/page-vectors";
-import { UserPreferences } from "@/types";
+import { PageItem, UserPreferences } from "@/types";
 
 const systemMessage = (userPreferences: UserPreferences) => `
 You are an expert content recommender. 

@@ -1,10 +1,8 @@
-import { startAllBackgroundJobs } from "./chromeActivity";
 import { storeUserPreferences } from "./actions";
 import { keepAlive } from "./keep-alive";
 
-// import { XMLHttpRequestPolyfill } from "@/lib/pollyfills/xhrPollyfill";
+import { startPageIndexer } from "@/background/pageIndexer";
 
-// (globalThis as any).XMLHttpRequest = XMLHttpRequestPolyfill;
 const initializeExtension = async () => {
   try {
     keepAlive(true);
@@ -18,15 +16,13 @@ const initializeExtension = async () => {
 
 chrome.runtime.onInstalled.addListener(() => {
   initializeExtension().catch(console.error);
-  startAllBackgroundJobs();
+  startPageIndexer();
 });
 
 chrome.runtime.onStartup.addListener(() => {
   initializeExtension().catch(console.error);
-  startAllBackgroundJobs();
+  startPageIndexer();
 });
-
-// handleBrowserIdleState(startAllBackgroundJobs, stopAllBackgroundJobs);
 
 chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })

@@ -4,6 +4,13 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export interface PageItem {
+  url: string;
+  title: string;
+  headers: string[];
+  content: string;
+}
+
 export interface RawInteraction {
   timestamp: string;
   type: "click" | "input" | "command" | "visit";

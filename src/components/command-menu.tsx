@@ -6,7 +6,7 @@ import { embed } from "ai";
 import { usePGlite } from "@electric-sql/pglite-react";
 
 import { geminiEmbeddingModel } from "@/lib/agents";
-import { searchPglite } from "@/lib/vector-storage";
+import { searchPglite } from "@/lib/storage/vector";
 
 function getSnippet(
   content: string,

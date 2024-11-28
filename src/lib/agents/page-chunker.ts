@@ -2,7 +2,7 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { Document } from "langchain/document";
 import { ChromeAI } from "@langchain/community/experimental/llms/chrome_ai";
 
-import { PageItem } from "@/lib/storage/page-vectors";
+import { PageItem } from "@/types";
 import { sliceToMaxTokens } from "@/lib/agents/index";
 import { ChromePromptAPI } from "@/types/global";
 

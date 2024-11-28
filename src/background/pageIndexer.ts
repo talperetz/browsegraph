@@ -1,8 +1,7 @@
 import { embedMany } from "ai";
 
-import { TabContentMessage, UserPreferences } from "@/types";
-import { PageItem } from "@/lib/storage/page-vectors";
-import { insertEmbeddings } from "@/lib/vector-storage";
+import { PageItem, TabContentMessage, UserPreferences } from "@/types";
+import { insertEmbeddings } from "@/lib/storage/vector";
 import { getLatestUserPreferencesFromDB } from "@/lib/storage/user";
 import { geminiEmbeddingModel } from "@/lib/agents";
 import { chunkPage } from "@/lib/agents/page-chunker";
@@ -61,20 +60,12 @@ const tabChangedListener = (
   }
 };
 
-const startTabChangeListener = (): void => {
+export const startPageIndexer = (): void => {
   chrome.tabs.onUpdated.addListener(tabChangedListener);
 };
 
-const stopTabChangeListener = (): void => {
+export const stopPageIndexer = (): void => {
   chrome.tabs.onUpdated.removeListener(tabChangedListener);
-};
-
-export const startInteractionLogger = (): void => {
-  startTabChangeListener();
-};
-
-export const stopInteractionLogger = (): void => {
-  stopTabChangeListener();
 };
 
 chrome.runtime.onMessage.addListener(async (message: TabContentMessage) => {

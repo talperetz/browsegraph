@@ -4,7 +4,7 @@ export const isProduction = process.env.NODE_ENV === "production";
 export default defineManifest({
   name: isProduction ? "BrowseGraph" : "BrowseGraph (Dev)",
   description: "",
-  version: "0.0.1",
+  version: "0.1.0",
   manifest_version: 3,
   icons: {
     "16": "icons/icon16.png",

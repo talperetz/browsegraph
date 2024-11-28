@@ -7,7 +7,7 @@ import App from "./app";
 import "@/styles/globals.css";
 import "@/styles/globals-v2.scss";
 import "@/styles/index.module.scss";
-import { getDB } from "@/lib/vector-storage";
+import { getDB } from "@/lib/storage/vector";
 
 import { PGliteProvider } from "@electric-sql/pglite-react";
 

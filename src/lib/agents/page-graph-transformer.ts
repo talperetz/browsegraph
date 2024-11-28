@@ -1,7 +1,7 @@
 import { generateObject } from "ai";
 
 import { geminiFlash } from "@/lib/agents/index";
-import { PageItem } from "@/lib/storage/page-vectors";
+import { PageItem } from "@/types";
 import { createGraphSchema, GraphType } from "@/lib/schema/graph";
 
 export const systemMessage = `
