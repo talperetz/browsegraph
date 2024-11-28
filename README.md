@@ -1,18 +1,21 @@
-# BrowseGraph
-
 <div align="center">
-   <video src="https://github.com/user-attachments/assets/aca8849b-0dce-4ff8-9dc1-9cc46b0055d0" width="400" control autoplay loop/>
+   <h2>
+      BrowseGraph - The 2nd Brain for Visual Thinkers
+   </h2>
+   Everything you browse, fully connected and always accessible. </br>
+   BrowseGraph is the first implementation of a local-first GraphRAG.
 </div>
 
+<p align="center">
+   <img alt="BrowseGraph" width=600 src="https://github.com/user-attachments/assets/c276737f-a017-4e6c-bfaf-c0a462295450"/>
+</p>
 
+<p align="center">
+    <img alt="License" src="https://img.shields.io/badge/License-MIT-green?style=plastic&logo=github&logoColor=white&cacheSeconds=60">
+    <img alt="Version" src="https://img.shields.io/badge/Version-0.1.0-blue?style=plastic&logo=github&logoColor=white&cacheSeconds=60">
+    <img alt="Chrome Version" src="https://img.shields.io/badge/Chrome-133%2B-orange?style=plastic&logo=google-chrome&logoColor=white&cacheSeconds=60">
+</p>
 
-
-## The 2nd Brain for Visual Thinkers
-
-Everything you browse, fully connected and always accessible.
-BrowseGraph is the first implementation of a local-first GraphRAG.
-
-![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-1.0.0-blue) ![Chrome Version](https://img.shields.io/badge/Chrome-133%2B-orange)
 
 ---
 
