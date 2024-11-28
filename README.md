@@ -1,4 +1,6 @@
 # BrowseGraph 🚀🔒
+![CleanShot 2024-11-28 at 09 32 07](https://github.com/user-attachments/assets/c465ba81-d57d-47fb-9e4c-83434d04040d)
+
 ## The 2nd Brain for Visual Thinkers
 
 Everything you browse, fully connected and always accessible.
