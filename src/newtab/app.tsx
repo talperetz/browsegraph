@@ -24,7 +24,7 @@ export default function IndexPage() {
 
   return (
     <DefaultLayout>
-      <div className="absolute top-2 left-2 z-10">
+      <div className="absolute top-4 left-8 z-10">
         <a href="https://browsegraph.com" rel="noreferrer" target="_blank">
           <BrowseGraphLogo />
         </a>
