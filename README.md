@@ -20,6 +20,7 @@
   </a>
 </p>
 
+</br>
 
 ## ⚡ Getting Started
 
@@ -32,7 +33,7 @@
 3. **Search and Ask**  
    Access all your knowledge seamlessly. Instantly search, navigate, and discover information whenever you need it.
 
-
+</br>
 
 ## 🔥 Key Features
 
@@ -43,8 +44,11 @@
 - **Graph-Based Insights**: Creates and stores graph data to enhance content recommendations.
 - **Blazingly Fast Retrieval**: Retrieve any piece of your browsed content instantly with powerful search and intuitive navigation.
 
+</br>
 
 ![CleanShot 2024-11-28 at 11 42 53](https://github.com/user-attachments/assets/01280850-0efb-4afc-ab7c-4163e6cd96a7)
+
+</br>
 
 ## 🧩 How It Works
 
@@ -74,6 +78,20 @@ sequenceDiagram
     CloudLLM -->> Extension: Return Graph Data
     Extension ->> Database: Store Graph Data
 ```
+</br>
+
+## 🛠 Built With
+BrowseGraph harnesses cutting-edge technologies to deliver a fast, precise, and private experience:
+
+- **Local Vector Database**: [pglite](https://github.com/electric-sql/pglite/) + [pgvector](https://github.com/pgvector/pgvector) for in-browser storage and blazing-fast vector search.
+
+- **Local LLMs**: Gemini Nano + [Chrome's built-in AI](https://developer.chrome.com/docs/ai/built-in) for private content classification, summarization, and personalization.
+
+- **Graph Rendering**: [ReactFlow](https://github.com/xyflow/xyflow) powers dynamic, interactive knowledge graphs.
+
+- **Search Interface**: [cmdk](https://github.com/pacocoursey/cmdk) provides a lightning-fast, intuitive search bar.
+
+</br>
 
 ## 🔒 Privacy & Security
 
@@ -81,12 +99,16 @@ sequenceDiagram
 - **Minimal Cloud Interaction:** Only non-sensitive, aggregated data is sent to the cloud for graph transformations.
 - **No Data Sharing:** Your browsing data is never shared with third parties.
 
+</br>
+
 ## ⏩ Roadmap
 
 - [ ] **Conversational Interface:** Build an interactive conversational layer to simplify user interactions.
 - [ ] **Artifacts UX:** Enable a side-by-side view of chat and graph for seamless exploration.
 - [ ] **Bring Your Own Key (BYOK):** Support user-provided keys for LLM providers to offer flexibility and control.
 - [ ] **Chrome Web Store Launch:** Officially release BrowseGraph on the Chrome Web Store.
+
+</br>
 
 ## 🤗 Contributions
 Composio is open-source and we welcome contributions. Please fork the repository, create a new branch for your feature, add your feature or improvement, and send a pull request.
