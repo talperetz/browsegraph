@@ -6,8 +6,8 @@
 </div>
   
 <p align="center">
-    <img alt="License" src="https://img.shields.io/badge/License-MIT-green?style=plastic&logo=github&logoColor=white&cacheSeconds=60">
     <img alt="Version" src="https://img.shields.io/badge/Version-0.1.0-blue?style=plastic&logo=github&logoColor=white&cacheSeconds=60">
+    <img alt="Status" src="https://img.shields.io/badge/Status-Alpha-yellow?cacheSeconds=60">
     <img alt="Chrome Version" src="https://img.shields.io/badge/Chrome-133%2B-orange?style=plastic&logo=google-chrome&logoColor=white&cacheSeconds=60">
 </p>
    Introducing the first in-browser GraphRAG. </br>
