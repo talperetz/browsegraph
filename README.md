@@ -38,6 +38,10 @@ git clone https://github.com/talperetz/browsegraph.git
 ```bash
 cd browsegraph
 ```
+#### Add a .env file to set your Key
+```txt
+VITE_GOOGLE_GENERATIVE_AI_API_KEY="***" 
+```
 
 #### Install Dependencies
 ```bash
