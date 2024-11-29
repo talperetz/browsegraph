@@ -24,14 +24,39 @@
 
 ## ⚡ Getting Started
 
-1. **Install BrowseGraph**  
-   Add BrowseGraph to your Chrome browser with a single click. Coming soon to Chrome Web Store.
+### Soon on Chrome Web Store
+BrowseGraph will be available on the Chrome Web Store soon with 1-click installation. Stay tuned!
 
-2. **Start Browsing**  
-   BrowseGraph works silently in the background, connecting every page you visit into a dynamic visual network.
+### Install Manually
 
-3. **Search and Ask**  
-   Access all your knowledge seamlessly. Instantly search, navigate, and discover information whenever you need it.
+#### Clone the Repository
+```bash
+git clone https://github.com/talperetz/browsegraph.git
+```
+
+#### Navigate to the Directory
+```bash
+cd browsegraph
+```
+
+#### Install Dependencies
+```bash
+pnpm install
+```
+
+#### Build the Extension
+```bash
+pnpm build
+```
+
+#### Navigate to the Directory
+```bash
+cd browsegraph
+```
+
+#### Load the Extension
+[Follow the official turorial](https://knowledge.workspace.google.com/kb/load-unpacked-extensions-000005962)
+
 
 </br>
 
