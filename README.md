@@ -140,4 +140,4 @@ BrowseGraph harnesses cutting-edge technologies to deliver a fast, precise, and 
 </br>
 
 ## 🤗 Contributions
-Composio is open-source and we welcome contributions. Please fork the repository, create a new branch for your feature, add your feature or improvement, and send a pull request.
+BrowseGraph is open-source and we welcome contributions. Please fork the repository, create a new branch for your feature, add your feature or improvement, and send a pull request.
