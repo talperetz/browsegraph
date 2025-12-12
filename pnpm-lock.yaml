@@ -99,8 +99,8 @@ importers:
         specifier: ^7.9.0
         version: 7.9.0
       drizzle-zod:
-        specifier: ^0.5.1
-        version: 0.5.1(drizzle-orm@0.36.3(@electric-sql/pglite@0.2.13)(@opentelemetry/api@1.9.0)(@types/react@18.3.3)(react@18.3.1))(zod@3.23.8)
+        specifier: ^0.8.3
+        version: 0.8.3(drizzle-orm@0.36.3(@electric-sql/pglite@0.2.13)(@opentelemetry/api@1.9.0)(@types/react@18.3.3)(react@18.3.1))(zod@3.23.8)
       framer-motion:
         specifier: ~11.1.1
         version: 11.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3034,11 +3034,11 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-zod@0.5.1:
-    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+  drizzle-zod@0.8.3:
+    resolution: {integrity: sha512-66yVOuvGhKJnTdiqj1/Xaaz9/qzOdRJADpDa68enqS6g3t0kpNkwNYjUuaeXgZfO/UWuIM9HIhSlJ6C5ZraMww==}
     peerDependencies:
-      drizzle-orm: '>=0.23.13'
-      zod: '*'
+      drizzle-orm: '>=0.36.0'
+      zod: ^3.25.0 || ^4.0.0
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -7947,7 +7947,7 @@ snapshots:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  drizzle-zod@0.5.1(drizzle-orm@0.36.3(@electric-sql/pglite@0.2.13)(@opentelemetry/api@1.9.0)(@types/react@18.3.3)(react@18.3.1))(zod@3.23.8):
+  drizzle-zod@0.8.3(drizzle-orm@0.36.3(@electric-sql/pglite@0.2.13)(@opentelemetry/api@1.9.0)(@types/react@18.3.3)(react@18.3.1))(zod@3.23.8):
     dependencies:
       drizzle-orm: 0.36.3(@electric-sql/pglite@0.2.13)(@opentelemetry/api@1.9.0)(@types/react@18.3.3)(react@18.3.1)
       zod: 3.23.8
