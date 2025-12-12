@@ -41,7 +41,7 @@
     "clsx": "2.1.1",
     "cmdk": "^1.0.0",
     "d3": "^7.9.0",
-    "drizzle-zod": "^0.5.1",
+    "drizzle-zod": "^0.8.3",
     "framer-motion": "~11.1.1",
     "html-to-text": "^9.0.5",
     "idb": "^8.0.0",
